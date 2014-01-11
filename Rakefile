@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DiceRoller::Application.load_tasks
+Randomizly::Application.load_tasks
