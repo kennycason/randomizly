@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta http-equiv="Content-type" value="text/html; charset=UTF-8" />
+    <meta name="description"
+          content="Dice Roller" />
+    <meta name="keywords"
+          content="d&d, dnd, dice, online" />
+    <meta name="Author" content="Kenneth Cason" />
+    <meta name="Copyright" content="Copyright (c) 2014 Kenneth Cason" /> 
+    <meta name="Rating" content="General" />
+    <meta name="doc-class" content="Living Document" />
+
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body class="<%= params[:action] %>" id="<%= params[:controller] %>">
+        <%= yield %>
+</body>
+</html>

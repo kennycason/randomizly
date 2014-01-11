@@ -1,0 +1,168 @@
+// Place all the styles related to the dice controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#home {
+
+	.header_wrapper {
+		width: 1000px;
+		margin-right: auto;
+		margin-left: auto;
+		height:50px;
+		display:block;
+		/*background-color: #c2ccf1;*/
+		
+		.logo {
+			float:left;
+			width: 300px;
+			margin-top:5px;
+			display:block;
+			color: #09f;
+			font-weight: bold;
+			font-size: 30px;
+		}
+		
+		.right_links {
+			float:right;
+			width: 350px;
+			margin-top:11px;
+			display:block;
+			font-size:18px;
+		}
+		
+		.right_links a {
+			float:right;
+			margin-right:10px;
+			display:inline;
+		}
+		
+	}
+
+	.wrapper {
+
+		width: 1000px;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: left;
+
+
+		.left-nav {
+			float: left;
+			width: 230px;
+			min-height: 500px;
+			background-color: #222;
+			color: #eee;
+			padding: 10px;
+
+			h3 {
+				font-size: 20px;
+			}
+
+			.endpoints {
+				.endpoint {
+					margin-left: 20px;
+					font-size: 18px;
+					margin-top: 8px;
+				}
+			}
+
+		}
+
+		.content {
+			float: left;
+			width: 720px;
+			min-height: 500px;
+			background-color: #555;
+			padding: 10px;
+			margin-left:5px;
+
+			h3 {
+				font-size: 20px;
+				font-weight: bold;
+				color: #fff;
+			}	
+
+			h2 {
+				font-size: 18px;
+				font-weight: normal;
+				color: #000;
+				font-style: italic;
+			}
+
+		    .text {
+		    	font-family: "Lucida Console", "Monaco", monospace;
+		        color: #000;
+		        font-size: 16px;
+		        background: #fff;
+		        padding: 10px;
+		        line-height: 18px;
+		        -moz-border-radius: 5px;
+		        -webkit-border-radius: 5px;
+		        border-radius: 5px;
+		        word-wrap: break-word;
+		        margin-bottom: 15px;
+
+		    	.title {
+		    		height: 15px;
+		    		width: 100px;
+		    		display: inline;
+		    		padding: 5px;
+		    		margin-left:-5px;
+		    		margin-right:5px;
+		    		background-color: #09f;
+		    		color: #fff;
+		    		font-size: 13px;
+		    		
+		    	}
+		    	.param-wrapper {
+			    	height: 15px;
+			    	width: 90px;
+			    	display: inline-block; 
+
+			    	.param {
+			    		display: inline;
+			    		padding: 5px;
+			    		margin-left:-5px;
+			    		margin-right:5px;
+			    		background-color: #333;
+			    		color: #fff;
+			    		font-size: 13px;
+			    		
+			    	}
+		    	}
+
+		    }
+
+
+		}
+
+	}
+
+
+	.footer_wrapper {
+		height: 150px;
+		width: 100%;
+		margin-right: auto;
+		margin-left: auto;
+		color: #333;
+		/*	background-color: #c2ccf1;*/
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;
+		
+		.footer_content {
+			padding-top:20px;
+		}
+		
+		.footer_links {
+			font-size: 18px;
+		}
+		
+		.copyright {
+			padding-top: 10px;
+			font-size: 20px;
+		}
+		
+	}
+
+}

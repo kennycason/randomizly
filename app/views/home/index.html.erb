@@ -1,0 +1,141 @@
+<script type="text/x-handlebars">
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="home">
+	<div class="wrapper">
+		<div class="header_wrapper">
+			<div class="logo">
+			Randomizly
+			</div>
+	        <div class="right_links">
+	          <a href="about">about</a>
+	        </div>
+		</div>
+		<div class="left-nav rounded">
+
+			<h3>API Doc</h3>
+			<div class="endpoints">
+				<div class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
+				<div class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
+				<div class="endpoint">{{#link-to 'card_api'}} Cards {{/link-to}}</div>
+			</div>
+		</div>
+		<div class="content rounded">
+			{{value}}
+		    {{outlet}}
+	    </div>
+	    <div style="clear:both;"></div>
+    </div>
+
+	<div class="footer_wrapper">
+		<div class="footer_content">
+			<div class="footer_links">
+				<a href="<%= root_url + 'tos' %>">&nbsp;Terms of Service&nbsp;</a>&nbsp;·&nbsp;
+				<a href="mailto:kenneth.caosn@gmail.com">&nbsp;Contact&nbsp;</a>
+				<div class="copyright">© MMXIV Randomizly</div>
+		  	</div>
+			<div style="height:10px;width:auto;"></div>
+
+		</div>
+	</div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="dice_api">
+	<h3>Dice API</h3>
+	<h2>Roll a single or group of dice, summing the results.</h2>
+
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/d/:sides</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/d/:sides/plus/:modifier</div>
+	<div class="text rounded">
+		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of dice to roll.<br/><br/>
+		<div class="param-wrapper"><div class="param rounded">:sides</div></div>The number of of sides on each dice.<br/><br/>
+		<div class="param-wrapper"><div class="param rounded">:modifier</div></div>The number to add to the final result.
+	</div>
+
+	<h3>Examples</h3>
+	<h2>&#8220;Darastrix hurls the corrupt king to his death 40ft below from atop his tower.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/4/d/6', '/4/d/6', :target => "_blank") %></div>
+	<pre><code data-language="json">{"rolled":"4d6","sum":16,"values":[3,5,6,2]}</code></pre>
+
+	<h2>&#8220;Theseus fires an arrow into the mob of angry orcs.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/d/20/plus/23', '/1/d/20/plus/23', :target => "_blank") %></div>
+	<pre><code data-language="json">{"rolled":"1d20+23","sum":36,"value":13}</code></pre>
+
+	<h2>&#8220;Magus casts Fireball!&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/10/d/6', '/10/d/6', :target => "_blank") %></div>
+	<pre><code data-language="json">{"rolled":"10d6","sum":42,"values":[5,4,4,2,6,6,4,4,3,4]}</code></pre>
+
+	{{outlet}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="coin_api">
+	<h3>Coin API</h3>
+	<h2>Flip a single or group of coins. The coins may be fair or weighted dice.</h2>
+
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/coin</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/coin/:weight</div>
+	<div class="text rounded">
+		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of coins to flip.<br/><br/>
+		<div class="param-wrapper"><div class="param rounded">:weight</div></div>The percent chance (0-100) the coin will land on heads.
+	</div>
+
+	<h3>Examples</h3>
+	<h2>&#8220;The commoner bets his life savings against Socks, he loses it all.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/coin', '/1/coin', :target => "_blank") %></div>
+	<pre><code data-language="json">{"flipped":"1 coin","value":"tails"}</code></pre>
+
+	<h2>&#8220;The grateful cleric showers Nemo in gold to thank him for his many charitable contributions!&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/50/coin', '/50/coin', :target => "_blank") %></div>
+	<pre><code data-language="json">{"flipped":"50 coins","values":["heads","heads","tails","heads","tails","heads","tails","heads","tails","tails","heads","tails","tails","heads","heads","heads","tails","tails","tails","tails","tails","heads","heads","heads","heads","tails","heads","tails","tails","heads","tails","tails","heads","tails","heads","heads","tails","tails","tails","tails","heads","heads","tails","tails","tails","tails","heads","tails","tails","heads"]}</code></pre>
+
+	<h2>&#8220;Darastrix grows angry as he loses 10 bets in a row from what seems to be an all too lucky coin...&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/coin/90', '/1/coin/90', :target => "_blank") %></div>
+	<pre><code data-language="json">{"flipped":"1 coin","value":"heads"}</code></pre>
+
+	{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="card_api">
+	<h3>Card API</h3>
+	<h2>Draw a single or group of cards</h2>
+
+	<div class="text rounded"><div class="title rounded">GET</div>/card/draw</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/card/draw/:number</div>
+	<div class="text rounded">
+		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of cards to draw. default is 1.
+	</div>
+
+	<h3>Examples</h3>
+	<h2>&#8220;Ogren draws two cards, scoring a Black Jack.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('cards/draw/2', 'cards/draw/2', :target => "_blank") %></div>
+	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade"},{"symbol":"J♥","rank":"Jack","suit":"Heart"}]</code></pre>
+
+	<h2>&#8220;Alasien draws a single card from the deck of magical cards.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('cards/draw', 'cards/draw', :target => "_blank") %></div>
+	<pre><code data-language="json">{"symbol":"4♦","rank":"4","suit":"Diamond"}</code></pre>
+
+	{{outlet}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="dice_roll">
+	<h1>Dice {{rolled}}</h1>
+	<p>rolled: {{value}}</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name="coin_flip">
+	<h1>Fair Coin</h1>
+	<p>flipped: {{value}}</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name="weighted_coin_flip">
+	<h1>Weighted Coin</h1>
+	<p>flipped: {{value}}</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name="card_draw">
+	<h1>Symbol {{symbol}}</h1>
+</script>
