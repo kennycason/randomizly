@@ -80,3 +80,4 @@ App.CardDrawRoute = Ember.Route.extend({
 		return $.getJSON('/card/draw');
 	}
 });
+
