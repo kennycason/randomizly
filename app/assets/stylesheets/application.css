@@ -43,6 +43,11 @@ body {
 
 }
 
+.active {
+    color: #fff;
+    text-decoration: underline;
+}
+
 
 .rounded {
     -moz-border-radius: 5px;
