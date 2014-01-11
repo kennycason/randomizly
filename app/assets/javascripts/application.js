@@ -10,7 +10,6 @@
 //= require rainbow-custom.min.js
 //= require_tree .
 
-
 App = Ember.Application.create();
 
 App.Router.map(function () {

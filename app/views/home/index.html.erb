@@ -2,6 +2,12 @@
     {{outlet}}
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#dice_api a").click();
+});
+</script>
+
 <script type="text/x-handlebars" data-template-name="home">
 	<div class="wrapper">
 		<div class="header_wrapper">
@@ -17,9 +23,9 @@
 
 			<h3>API Doc</h3>
 			<div class="endpoints">
-				<div class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
-				<div class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
-				<div class="endpoint">{{#link-to 'card_api'}} Cards {{/link-to}}</div>
+				<div id="dice_api" class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
+				<div id="coin_api" class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
+				<div id="card_api" class="endpoint">{{#link-to 'card_api'}} Cards {{/link-to}}</div>
 			</div>
 		</div>
 		<div class="content rounded">
