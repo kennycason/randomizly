@@ -16,9 +16,11 @@ Randomizly::Application.routes.draw do
   get ':number/coin/:weight' => 'coin#flip'
   get 'coin#flip' => 'home#index'
 
-  get 'cards/draw' => 'deck#draw'
-  get 'cards/draw/:number' => 'deck#draw'
-  get 'cards#draw' => 'home#index'
+  get 'deck/draw' => 'deck#draw'
+  get 'deck/draw/:number' => 'deck#draw'
+  get ':decks/decks/draw/:number' => 'deck#draw'
+  get ':decks/decks/draw/' => 'deck#draw'
+  get 'deck#draw' => 'home#index'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

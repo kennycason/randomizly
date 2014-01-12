@@ -25,7 +25,7 @@ $(document).ready(function() {
 			<div class="endpoints">
 				<div id="dice_api" class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
 				<div id="coin_api" class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
-				<div id="card_api" class="endpoint">{{#link-to 'card_api'}} Cards {{/link-to}}</div>
+				<div id="deck_api" class="endpoint">{{#link-to 'deck_api'}} Cards {{/link-to}}</div>
 			</div>
 		</div>
 		<div class="content rounded">
@@ -61,15 +61,15 @@ $(document).ready(function() {
 
 	<h3>Examples</h3>
 	<h2>&#8220;Darastrix hurls the corrupt king to his death 40ft below from atop his tower.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/4/d/6', '/4/d/6', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/4/d/6', '/4/d/6', :target => "_blank") %></div>
 	<pre><code data-language="json">{"rolled":"4d6","sum":16,"values":[3,5,6,2]}</code></pre>
 
 	<h2>&#8220;Theseus fires an arrow into the mob of angry orcs.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/d/20/plus/23', '/1/d/20/plus/23', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/1/d/20/plus/23', '/1/d/20/plus/23', :target => "_blank") %></div>
 	<pre><code data-language="json">{"rolled":"1d20+23","sum":36,"value":13}</code></pre>
 
 	<h2>&#8220;Magus casts Fireball!&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/10/d/6', '/10/d/6', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/10/d/6', '/10/d/6', :target => "_blank") %></div>
 	<pre><code data-language="json">{"rolled":"10d6","sum":42,"values":[5,4,4,2,6,6,4,4,3,4]}</code></pre>
 
 	{{outlet}}
@@ -89,38 +89,55 @@ $(document).ready(function() {
 
 	<h3>Examples</h3>
 	<h2>&#8220;The commoner bets his life savings against Socks, he loses it all.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/coin', '/1/coin', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/1/coin', '/1/coin', :target => "_blank") %></div>
 	<pre><code data-language="json">{"flipped":"1 coin","value":"tails"}</code></pre>
 
 	<h2>&#8220;The grateful cleric showers Nemo in gold to thank him for his many charitable contributions!&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/50/coin', '/50/coin', :target => "_blank") %></div>
-	<pre><code data-language="json">{"flipped":"50 coins","values":["heads","heads","tails","heads","tails","heads","tails","heads","tails","tails","heads","tails","tails","heads","heads","heads","tails","tails","tails","tails","tails","heads","heads","heads","heads","tails","heads","tails","tails","heads","tails","tails","heads","tails","heads","heads","tails","tails","tails","tails","heads","heads","tails","tails","tails","tails","heads","tails","tails","heads"]}</code></pre>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/50/coin', '/50/coin', :target => "_blank") %></div>
+	<pre><code data-language="json">{"flipped":"50 coins","values":["heads","heads","tails","heads","tails","heads","tails"
+,"heads","tails","tails","heads","tails","tails","heads","heads","heads","tails","tails"
+,"tails","tails","tails","heads","heads","heads","heads","tails","heads","tails","tails"
+,"heads","tails","tails","heads","tails","heads","heads","tails","tails","tails","tails"
+,"heads","heads","tails","tails","tails","tails","heads","tails","tails","heads"]}</code></pre>
 
 	<h2>&#8220;Darastrix grows angry as he loses 10 bets in a row from what seems to be an all too lucky coin...&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('/1/coin/90', '/1/coin/90', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/1/coin/90', '/1/coin/90', :target => "_blank") %></div>
 	<pre><code data-language="json">{"flipped":"1 coin","value":"heads"}</code></pre>
 
 	{{outlet}}
 </script>
 
-<script type="text/x-handlebars" data-template-name="card_api">
+<script type="text/x-handlebars" data-template-name="deck_api">
 	<h3>Card API</h3>
 	<h2>Draw a single or group of cards</h2>
 
-	<div class="text rounded"><div class="title rounded">GET</div>/card/draw</div>
-	<div class="text rounded"><div class="title rounded">GET</div>/card/draw/:number</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/deck/draw</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/deck/draw/:number</div>
+	<div class="text rounded"><div class="title rounded">GET</div>:decks/decks/draw</div>
+	<div class="text rounded"><div class="title rounded">GET</div>:decks/decks/draw/:number</div>
 	<div class="text rounded">
-		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of cards to draw. default is 1.
+		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of cards to draw.<br/><br/>
+		<div class="param-wrapper"><div class="param rounded">:decks</div></div>The number of decks to draw from.
 	</div>
 
 	<h3>Examples</h3>
 	<h2>&#8220;Ogren draws two cards, scoring a Black Jack.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('cards/draw/2', 'cards/draw/2', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw/2', 'deck/draw/2', :target => "_blank") %></div>
 	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade"},{"symbol":"J♥","rank":"Jack","suit":"Heart"}]</code></pre>
 
 	<h2>&#8220;Alasien draws a single card from the deck of magical cards.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div> <%=link_to('cards/draw', 'cards/draw', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw', 'deck/draw', :target => "_blank") %></div>
 	<pre><code data-language="json">{"symbol":"4♦","rank":"4","suit":"Diamond"}</code></pre>
+
+	<h2>&#8220;Theseus agrees to help if the traveler can draw two of the same card.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('2/decks/draw/2', '2/decks/draw/2', :target => "_blank") %></div>
+	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade"},{"symbol":"A♠","rank":"Ace","suit":"Spade"}]</code></pre>
+
+	<h2>&#8220;Socks draws five cards during his game of poker, using three decks&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('3/decks/draw/3', '2/decks/draw/2', :target => "_blank") %></div>
+	<pre><code data-language="json">[{"symbol":"Q♦","rank":"Queen","suit":"Diamond"},{"symbol":"7♣","rank":"7","suit":"Clubs"}
+,{"symbol":"K♥","rank":"King","suit":"Heart"},{"symbol":"K♣","rank":"King","suit":"Clubs"}
+,{"symbol":"6♠","rank":"6","suit":"Spade"}]</code></pre>
 
 	{{outlet}}
 </script>

@@ -21,8 +21,8 @@ App.Router.map(function () {
 	  		this.resource('coin_flip', { path : '/coin' });
 	  		this.resource('weighted_coin_flip', { path : 'coin/:weight' });
   		});
-  		this.resource('card_api', { path : 'card_api' }, function() {
-	  		this.resource('card_draw', { path : '/card/draw' });
+  		this.resource('deck_api', { path : 'deck_api' }, function() {
+	  		this.resource('deck_draw', { path : '/deck/draw' });
   		});
   	});
 });
@@ -41,6 +41,12 @@ App.DiceApiRoute = Ember.Route.extend({
 	}
 });
 
+App.DiceApiView = Ember.View.extend({
+  	didInsertElement: function() {
+  		Rainbow.color();
+  	}
+});
+
 App.DiceRollRoute = Ember.Route.extend({
 	model : function(params) {
 		return $.getJSON('/1/d/' + params.sides);
@@ -53,6 +59,12 @@ App.CoinApiRoute = Ember.Route.extend({
 	model : function(params) {
 		return {};
 	}
+});
+
+App.CoinApiView = Ember.View.extend({
+  	didInsertElement: function() {
+  		Rainbow.color();
+  	}
 });
 
 App.CoinFlipRoute = Ember.Route.extend({
@@ -68,15 +80,21 @@ App.WeightedCoinFlipRoute = Ember.Route.extend({
 });
 
 
-App.CardApiRoute = Ember.Route.extend({
+App.DeckApiRoute = Ember.Route.extend({
 	model : function(params) {
 		return {};
 	}
 });
 
-App.CardDrawRoute = Ember.Route.extend({
+App.DeckApiView = Ember.View.extend({
+  	didInsertElement: function() {
+  		Rainbow.color();
+  	}
+});
+
+App.DeckDrawRoute = Ember.Route.extend({
 	model : function(params) {
-		return $.getJSON('/card/draw');
+		return $.getJSON('/deck/draw');
 	}
 });
 
