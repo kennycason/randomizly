@@ -6,23 +6,23 @@
 <script type="text/x-handlebars" data-template-name="home">
 	<div class="wrapper">
 		<div class="header_wrapper">
-			<div class="logo">
-			Randomizly
-			</div>
+			<div class="logo">Randomizly</div>
+			<div class="motto">a random api</div>
 	        <div class="right_links">
-	          <a href="mailto:kenneth.caosn@gmail.com">&nbsp;Contact&nbsp;</a>
-	          <a href="https://github.com/kennycason/randomizly" target="_blank">GitHub</a>
+	          <a href="mailto:kenneth.cason@gmail.com">&nbsp;Contact&nbsp;</a>
 	        </div>
 		</div>
 		<div class="left-nav rounded">
 
-			<h3>API Doc</h3>
+			<h3>API Endpoints</h3>
 			<div class="endpoints">
 				<div id="dice_api" class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
 				<div id="coin_api" class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
 				<div id="deck_api" class="endpoint">{{#link-to 'deck_api'}} Cards {{/link-to}}</div>
+				<div id="letter_api" class="endpoint">{{#link-to 'letter_api'}} Letters {{/link-to}}</div>
 				<div id="api_console" class="endpoint">{{#link-to 'api_console'}} API Console {{/link-to}}</div>
 			</div>
+			
 
 		</div>
 		<div class="content rounded">
@@ -116,23 +116,45 @@
 	<h3>Examples</h3>
 	<h2>&#8220;Ogren draws two cards, scoring a Black Jack.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw/2', 'deck/draw/2', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"J♥","rank":"Jack","suit":"Heart","image":"image_url/J♥.jpeg"}]</code></pre>
+	<pre><code data-language="json">{"values":[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"J♥","rank":"Jack","suit":"Heart","image":"image_url/J♥.jpeg"}]}</code></pre>
 
 	<h2>&#8220;Alasien draws a single card from the deck of magical cards.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw', 'deck/draw', :target => "_blank") %></div>
-	<pre><code data-language="json">{"symbol":"4♦","rank":"4","suit":"Diamond","image":"image_url/4♦.jpeg"}</code></pre>
+	<pre><code data-language="json">{"value":{"symbol":"4♦","rank":"4","suit":"Diamond","image":"image_url/4♦.jpeg"}}</code></pre>
 
 	<h2>&#8220;Theseus agrees to help if the traveler can draw two of the same card.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('2/decks/draw/2', '2/decks/draw/2', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"}]</code></pre>
+	<pre><code data-language="json">{"values":[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"}]}</code></pre>
 
 	<h2>&#8220;Socks draws five cards during his game of poker, using three decks&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('3/decks/draw/5', '3/decks/draw/5', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"J♠","rank":"Jack","suit":"Spade","image":"/image_url/J♠.jpeg"},{"symbol":"K♥","rank":"King","suit":"Heart","image":"/image_url/K♥.jpeg"},{"symbol":"J♦","rank":"Jack","suit":"Diamond","image":"/image_url/J♦.jpeg"},{"symbol":"6♠","rank":"6","suit":"Spade","image":"/image_url/6♠.jpeg"},{"symbol":"4♥","rank":"4","suit":"Heart","image":"/image_url/4♥.jpeg"}]</code></pre>
+	<pre><code data-language="json">{"values":[{"symbol":"J♠","rank":"Jack","suit":"Spade","image":"/image_url/J♠.jpeg"},{"symbol":"K♥","rank":"King","suit":"Heart","image":"/image_url/K♥.jpeg"},{"symbol":"J♦","rank":"Jack","suit":"Diamond","image":"/image_url/J♦.jpeg"},{"symbol":"6♠","rank":"6","suit":"Spade","image":"/image_url/6♠.jpeg"},{"symbol":"4♥","rank":"4","suit":"Heart","image":"/image_url/4♥.jpeg"}]}</code></pre>
 
 	{{outlet}}
 </script>
 
+
+<script type="text/x-handlebars" data-template-name="letter_api">
+	<h3>Letter API</h3>
+	<h2>Return a single or set of random letters.</h2>
+
+	<div class="text rounded"><div class="title rounded">GET</div>/letter</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/letter</div>
+	<div class="text rounded">
+		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of letters to return.
+	</div>
+
+	<h3>Examples</h3>
+	<h2>&#8220;Magus wishes to challenge his intelligence by creating as many words as possible from the list of words.&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/12/letters', '/12/letters', :target => "_blank") %></div>
+	<pre><code data-language="json">{"values":["R","F","E","D","V","K","S","O","M","K","A","L"]}</code></pre>
+
+	<h2>&#8220;Ogren recites the only letter of the alphabet he knows...&#8221;</h2>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/letter', '/letter', :target => "_blank") %></div>
+	<pre><code data-language="json">{"value":"O"}</code></pre>
+
+	{{outlet}}
+</script>
 
 <script type="text/x-handlebars" data-template-name="api_console">
 	<h3>API Console</h3>

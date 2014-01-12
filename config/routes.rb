@@ -21,6 +21,9 @@ Randomizly::Application.routes.draw do
   get ':decks/decks/draw/:number' => 'deck#draw'
   get ':decks/decks/draw/' => 'deck#draw'
 
+  get 'letter' => 'letter#get'
+  get ':number/letters' => 'letter#get'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

@@ -20,17 +20,16 @@ class DeckController < ApplicationController
 			end
 		end
 
+		response = {}
 		if num == 1
-			render :json => deck.draw
+			response[:value] = deck.draw
 		else
-			values = Array.new
+			response[:values] = Array.new
 			num.times {
-				values << deck.draw
+				response[:values] << deck.draw
 			}
-
-
-			render :json => values
 		end
+		render :json => response
 	end
 
 end

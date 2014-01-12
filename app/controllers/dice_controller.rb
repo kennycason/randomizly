@@ -25,7 +25,10 @@ class DiceController < ApplicationController
 				response[:rolled] +=  mod.to_s
 			end
 		end
-		response[:sum] = sum
+
+		if params[:number].to_i > 1
+			response[:sum] = sum
+		end
 
 		if values.length == 1
 			response[:value] = values[0]
