@@ -9,7 +9,8 @@ class Card
   	def initialize(id)
     	@symbol =  SHORT_RANKS[id % 13] + SHORT_SUITS[id % 4]
     	@rank = RANKS[id % 13]
-    	@suit = SUITS[id % 4]	
+    	@suit = SUITS[id % 4]
+      @image = ActionController::Base.helpers.asset_path('cards/' + @symbol + '.jpeg')	
     end
 
 end

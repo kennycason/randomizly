@@ -28,7 +28,7 @@ class DeckController < ApplicationController
 				values << deck.draw
 			}
 
-			response = {}
+
 			render :json => values
 		end
 	end

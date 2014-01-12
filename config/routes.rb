@@ -4,23 +4,23 @@ Randomizly::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#/index'
+  root 'home#index'
 
 
   # Example of regular route:
   get ':number/d/:sides' => 'dice#roll'
   get ':number/d/:sides/plus/:mod' => 'dice#roll'
-  get 'dice#roll' => 'home#index'
 
-  get ':number/coin' => 'coin#flip'
-  get ':number/coin/:weight' => 'coin#flip'
-  get 'coin#flip' => 'home#index'
+  get 'coin' => 'coin#flip'
+  get 'coin/:weight' => 'coin#flip'
+  get ':number/coins' => 'coin#flip'
+  get ':number/coins/:weight' => 'coin#flip'
 
   get 'deck/draw' => 'deck#draw'
   get 'deck/draw/:number' => 'deck#draw'
   get ':decks/decks/draw/:number' => 'deck#draw'
   get ':decks/decks/draw/' => 'deck#draw'
-  get 'deck#draw' => 'home#index'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

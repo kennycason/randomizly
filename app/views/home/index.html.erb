@@ -21,7 +21,9 @@
 				<div id="dice_api" class="endpoint">{{#link-to 'dice_api'}} Dice {{/link-to}}</div>
 				<div id="coin_api" class="endpoint">{{#link-to 'coin_api'}} Coins {{/link-to}}</div>
 				<div id="deck_api" class="endpoint">{{#link-to 'deck_api'}} Cards {{/link-to}}</div>
+				<div id="api_console" class="endpoint">{{#link-to 'api_console'}} API Console {{/link-to}}</div>
 			</div>
+
 		</div>
 		<div class="content rounded">
 		    {{outlet}}
@@ -70,13 +72,14 @@
 	{{outlet}}
 </script>
 
-
 <script type="text/x-handlebars" data-template-name="coin_api">
 	<h3>Coin API</h3>
 	<h2>Flip a single or group of coins. The coins may be fair or weighted dice.</h2>
 
-	<div class="text rounded"><div class="title rounded">GET</div>/:number/coin</div>
-	<div class="text rounded"><div class="title rounded">GET</div>/:number/coin/:weight</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/coin</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/coin/:weight</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/coins</div>
+	<div class="text rounded"><div class="title rounded">GET</div>/:number/coins/:weight</div>
 	<div class="text rounded">
 		<div class="param-wrapper"><div class="param rounded">:number</div></div>The number of coins to flip.<br/><br/>
 		<div class="param-wrapper"><div class="param rounded">:weight</div></div>The percent chance (0-100) the coin will land on heads.
@@ -84,19 +87,15 @@
 
 	<h3>Examples</h3>
 	<h2>&#8220;The commoner bets his life savings against Socks, he loses it all.&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/1/coin', '/1/coin', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/coin', '/coin', :target => "_blank") %></div>
 	<pre><code data-language="json">{"flipped":"1 coin","value":"tails"}</code></pre>
 
 	<h2>&#8220;The grateful cleric showers Nemo in gold to thank him for his many charitable contributions!&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/50/coin', '/50/coin', :target => "_blank") %></div>
-	<pre><code data-language="json">{"flipped":"50 coins","values":["heads","heads","tails","heads","tails","heads","tails"
-,"heads","tails","tails","heads","tails","tails","heads","heads","heads","tails","tails"
-,"tails","tails","tails","heads","heads","heads","heads","tails","heads","tails","tails"
-,"heads","tails","tails","heads","tails","heads","heads","tails","tails","tails","tails"
-,"heads","heads","tails","tails","tails","tails","heads","tails","tails","heads"]}</code></pre>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/10/coins', '/10/coins', :target => "_blank") %></div>
+	<pre><code data-language="json">{"flipped":"10 coins","values":["heads","heads","tails","heads","tails","heads","tails","heads","tails","tails"]}</code></pre>
 
 	<h2>&#8220;Darastrix grows angry as he loses 10 bets in a row from what seems to be an all too lucky coin...&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/1/coin/90', '/1/coin/90', :target => "_blank") %></div>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('/coin/90', '/coin/90', :target => "_blank") %></div>
 	<pre><code data-language="json">{"flipped":"1 coin","value":"heads"}</code></pre>
 
 	{{outlet}}
@@ -118,41 +117,39 @@
 	<h3>Examples</h3>
 	<h2>&#8220;Ogren draws two cards, scoring a Black Jack.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw/2', 'deck/draw/2', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade"},{"symbol":"J♥","rank":"Jack","suit":"Heart"}]</code></pre>
+	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"J♥","rank":"Jack","suit":"Heart","image":"image_url/J♥.jpeg"}]</code></pre>
 
 	<h2>&#8220;Alasien draws a single card from the deck of magical cards.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('deck/draw', 'deck/draw', :target => "_blank") %></div>
-	<pre><code data-language="json">{"symbol":"4♦","rank":"4","suit":"Diamond"}</code></pre>
+	<pre><code data-language="json">{"symbol":"4♦","rank":"4","suit":"Diamond","image":"image_url/4♦.jpeg"}</code></pre>
 
 	<h2>&#8220;Theseus agrees to help if the traveler can draw two of the same card.&#8221;</h2>
 	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('2/decks/draw/2', '2/decks/draw/2', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade"},{"symbol":"A♠","rank":"Ace","suit":"Spade"}]</code></pre>
+	<pre><code data-language="json">[{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"},{"symbol":"A♠","rank":"Ace","suit":"Spade","image":"image_url/A♠.jpeg"}]</code></pre>
 
 	<h2>&#8220;Socks draws five cards during his game of poker, using three decks&#8221;</h2>
-	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('3/decks/draw/3', '2/decks/draw/2', :target => "_blank") %></div>
-	<pre><code data-language="json">[{"symbol":"Q♦","rank":"Queen","suit":"Diamond"},{"symbol":"7♣","rank":"7","suit":"Clubs"}
-,{"symbol":"K♥","rank":"King","suit":"Heart"},{"symbol":"K♣","rank":"King","suit":"Clubs"}
-,{"symbol":"6♠","rank":"6","suit":"Spade"}]</code></pre>
+	<div class="text rounded"><div class="title rounded">GET</div><%=link_to('3/decks/draw/5', '3/decks/draw/5', :target => "_blank") %></div>
+	<pre><code data-language="json">[{"symbol":"J♠","rank":"Jack","suit":"Spade","image":"/image_url/J♠.jpeg"},{"symbol":"K♥","rank":"King","suit":"Heart","image":"/image_url/K♥.jpeg"},{"symbol":"J♦","rank":"Jack","suit":"Diamond","image":"/image_url/J♦.jpeg"},{"symbol":"6♠","rank":"6","suit":"Spade","image":"/image_url/6♠.jpeg"},{"symbol":"4♥","rank":"4","suit":"Heart","image":"/image_url/4♥.jpeg"}]</code></pre>
 
 	{{outlet}}
 </script>
 
 
-<script type="text/x-handlebars" data-template-name="dice_roll">
-	<h1>Dice {{rolled}}</h1>
-	<p>rolled: {{value}}</p>
+<script type="text/x-handlebars" data-template-name="api_console">
+	<h3>API Console</h3>
+	<div class="text rounded"><div class="title rounded">GET</div>
+		<span class="console_form">
+		<%= text_field_tag(:method, '/deck/draw/5', :id => 'api_method') %>
+		<button id="submit_api_button" class="api_submit rounded" {{action 'call'}}>SUBMIT</button>
+		</span>
+	</div>
+	<div id="api_response" style="display:none;">
+		<h3>Response</h3>
+		<div class="response_container"></div>
+	</div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="coin_flip">
-	<h1>Fair Coin</h1>
-	<p>flipped: {{value}}</p>
-</script>
-
-<script type="text/x-handlebars" data-template-name="weighted_coin_flip">
-	<h1>Weighted Coin</h1>
-	<p>flipped: {{value}}</p>
-</script>
-
-<script type="text/x-handlebars" data-template-name="card_draw">
-	<h1>Symbol {{symbol}}</h1>
+<script type="text/x-handlebars" data-template-name="api_call">
+	<h1>Response</h1>
+	<pre><code id="api_response_tag" data-language="json">{{response}}</code></pre>
 </script>

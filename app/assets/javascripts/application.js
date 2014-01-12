@@ -24,6 +24,9 @@ App.Router.map(function () {
   		this.resource('deck_api', { path : 'deck_api' }, function() {
 	  		this.resource('deck_draw', { path : '/deck/draw' });
   		});
+  		this.resource('api_console', { path : 'api_console' }, function() {
+  			this.resource('api_call', { path : '/call' });
+  		});
   	});
 });
 
@@ -35,7 +38,9 @@ App.HomeRoute = Ember.Route.extend({
 
 App.HomeView = Ember.View.extend({
   	didInsertElement: function() {
-  		$("#dice_api a").click();
+  		if(!window.location.hash.substr(1)) { // by default load dice_api
+  			$("#dice_api a").click();
+  		}
   	}
 });
 
@@ -48,6 +53,7 @@ App.DiceApiRoute = Ember.Route.extend({
 
 App.DiceApiView = Ember.View.extend({
   	didInsertElement: function() {
+  		cleanCodeJS();
   		Rainbow.color();
   	}
 });
@@ -68,6 +74,7 @@ App.CoinApiRoute = Ember.Route.extend({
 
 App.CoinApiView = Ember.View.extend({
   	didInsertElement: function() {
+  		cleanCodeJS();
   		Rainbow.color();
   	}
 });
@@ -93,6 +100,7 @@ App.DeckApiRoute = Ember.Route.extend({
 
 App.DeckApiView = Ember.View.extend({
   	didInsertElement: function() {
+  		cleanCodeJS();
   		Rainbow.color();
   	}
 });
@@ -103,3 +111,59 @@ App.DeckDrawRoute = Ember.Route.extend({
 	}
 });
 
+
+
+App.ApiConsoleRoute = Ember.Route.extend({
+	model : function(params) {
+		return {};
+	},
+	actions: {
+	    call: function() {
+
+			$.ajax({
+				async: false,
+			  	dataType: "json",
+			  	url: $("#api_method").val(),
+			  	success: function(response) {
+					$("#api_response").show();
+					$(".response_container").html('<pre><code data-language="json">' + JSON.stringify(response, undefined, 2) + '</code></pre>');
+					Rainbow.color();
+			  	}
+			});
+	    }
+	}
+});
+
+App.ApiConsoleView = Ember.View.extend({
+  	didInsertElement: function() {
+  		$("#submit_api_button").click();
+  	}
+});
+
+
+// unused
+App.ApiCallRoute = Ember.Route.extend({
+	model : function(params) {
+		var method = $("#api_method").val();
+
+		return $.getJSON(method).then(function(response) {
+			return { response : JSON.stringify(response, undefined, 2) };
+		});
+	}
+});
+// unused
+App.ApiCallView = Ember.View.extend({
+  	didInsertElement: function() {
+  		$("#api_response_tag script").remove();
+  		Rainbow.color();
+  	}
+});
+
+
+function cleanCodeJS() {
+  	$("code").each(function() {
+  		var json = $.parseJSON($(this).html());
+  		var jsonPretty = JSON.stringify(json, undefined, 2);
+  		$(this).html(jsonPretty);
+  	});
+}

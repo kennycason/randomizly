@@ -72,8 +72,13 @@ body {
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 5px;
-        word-wrap: break-word;
         margin-bottom: 15px;
+/* For Firefox */
+white-space: pre-wrap;
+word-break: break-all;
+
+/* For Chrome and IE */
+word-wrap: break-word;
     }
 
     code span {
