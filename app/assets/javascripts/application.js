@@ -33,6 +33,11 @@ App.HomeRoute = Ember.Route.extend({
 	}
 });
 
+App.HomeView = Ember.View.extend({
+  	didInsertElement: function() {
+  		$("#dice_api a").click();
+  	}
+});
 
 
 App.DiceApiRoute = Ember.Route.extend({
